@@ -25,6 +25,7 @@
     .pantalla2 {
       display: none;
       background-color: #fff0f5;
+      position: relative;
     }
     h1 {
       font-size: 2em;
@@ -67,7 +68,7 @@
       border-radius: 10px;
       box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     }
-    .corazones {
+    .corazones, .corazones2 {
       position: absolute;
       top: 0;
       left: 0;
@@ -107,61 +108,83 @@
 </head>
 <body>
   <div id="tsparticles"></div>
+
   <div class="pantalla">
     <h1>Hola Shirley ❤️</h1>
     <p>Soy Gero, y te hice esto para agradecerte por todos los momentos bonitos que pasamos juntos. ¿Me permitís que sigamos amandonos por mucho tiempo más?</p>
+    
     <div class="fotos">
       <img src="fotos/foto4.jpg" alt="Foto especial primero">
       <img src="fotos/foto1.jpg" alt="Foto juntos">
       <img src="fotos/foto2.jpg" alt="Foto juntos">
       <img src="fotos/foto3.jpg" alt="Foto juntos">
     </div>
+
     <div class="galeria">
       <img src="fotos/foto5.jpg" alt="Extra 2">
       <img src="fotos/foto6.jpg" alt="Más amor">
       <img src="fotos/foto7.jpg" alt="Y más...">
     </div>
+
     <button onclick="mostrarPantalla2()">Te doy mi amor Gero💖</button>
   </div>
+
   <div class="pantalla pantalla2">
     <h1>¡Graciasss, mi amorr!😊💕</h1>
-    <p>No sabés lo feliz que me haces. Gracias por existir, Shirley. Te amo infinitamente! </p>
+    <p>No sabés lo feliz que me haces. Gracias por existir, Shirley. Te amo infinitamente!</p>
     <img src="fotos/destacada.jpg" alt="Foto especial" style="width:80%; border-radius:15px; box-shadow:0 2px 10px rgba(0,0,0,0.1); margin-top:20px;">
+    <div class="corazones2"></div>
   </div>
-  <div class="corazones"></div>
-  <script>
-    tsParticles.load("tsparticles", {
-  fullScreen: { enable: true, zIndex: -1 },
-  particles: {
-    number: { value: 80 },
-    shape: {
-      type: "image",
-      image: [{
-        src: "https://cdn-icons-png.flaticon.com/512/833/833472.png",
-        width: 20,
-        height: 20
-      }]
-    },
-    size: { value: 20 },
-    move: { speed: 1, direction: "bottom", outModes: "out" },
-    opacity: { value: 0.9 }
-  }
-});
 
+  <div class="corazones"></div>
+
+  <script>
+    // Partículas (lluvia de corazones)
+    tsParticles.load("tsparticles", {
+      fullScreen: { enable: true, zIndex: -1 },
+      particles: {
+        number: { value: 80 },
+        shape: {
+          type: "image",
+          image: [{
+            src: "https://cdn-icons-png.flaticon.com/512/833/833472.png",
+            width: 20,
+            height: 20
+          }]
+        },
+        size: { value: 20 },
+        move: { speed: 1, direction: "bottom", outModes: "out" },
+        opacity: { value: 0.9 }
+      }
+    });
+
+    // Cambio de pantalla
     function mostrarPantalla2() {
       document.querySelector('.pantalla').style.display = 'none';
       document.querySelector('.pantalla2').style.display = 'flex';
     }
 
-    const corazones = document.querySelector('.corazones');
+    // Corazones flotantes pantalla 1
+    const corazones1 = document.querySelector('.corazones');
     for (let i = 0; i < 40; i++) {
       const corazon = document.createElement('div');
       corazon.className = 'corazon';
       corazon.style.left = `${Math.random() * 100}vw`;
       corazon.style.animationDuration = `${5 + Math.random() * 5}s`;
-      corazones.appendChild(corazon);
+      corazones1.appendChild(corazon);
     }
 
+    // Corazones flotantes pantalla 2
+    const corazones2 = document.querySelector('.corazones2');
+    for (let i = 0; i < 40; i++) {
+      const corazon = document.createElement('div');
+      corazon.className = 'corazon';
+      corazon.style.left = `${Math.random() * 100}vw`;
+      corazon.style.animationDuration = `${5 + Math.random() * 5}s`;
+      corazones2.appendChild(corazon);
+    }
+
+    // Corazones que aparecen al hacer clic
     document.addEventListener('click', (e) => {
       for (let i = 0; i < 10; i++) {
         let heart = document.createElement("div");
